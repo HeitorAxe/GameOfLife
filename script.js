@@ -1,9 +1,17 @@
 let startButton = document.querySelector(".start");
 let resetButton = document.querySelector(".reset");
 resetButton.addEventListener("click", function() { document.location.reload(true); })
-let gridSize = 55;
-let frames = 1000;
-let aux = 0;
+let gridSize = 60;
+
+var mouseDown = 0;
+document.body.onmousedown = function() {
+	++mouseDown;
+}
+document.body.onmouseup = function() {
+	--mouseDown;
+}
+
+
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -30,10 +38,16 @@ function createCell(coordinateX, coordinateY) {
 	newCell.id = "(" + coordinateX + "," + coordinateY + ")";
 	let newCellText = document.createElement("div");
 
+	newCell.addEventListener("mouseover", function() {
+		if (mouseDown) {
+			newCell.classList.toggle("dead");
+			newCell.classList.toggle("alive");
+		}
+	}, false);
 	newCell.addEventListener("click", function() {
 		newCell.classList.toggle("dead");
 		newCell.classList.toggle("alive");
-	}, false);
+	}, false)
 
 	newCellText.classList.add("cell-text");
 	newCell.appendChild(newCellText);
@@ -57,7 +71,19 @@ function isAlive(x, y) {
 
 	let isAlive = false;
 	if (x < 0 || y < 0 || x > gridSize || y > gridSize) {
-		return isAlive;
+		//return isAlive;
+		if (x < 0) {
+			x += gridSize
+		}
+		if (y < 0) {
+			y += gridSize
+		}
+		if (x > gridSize) {
+			x -= gridSize
+		}
+		if (y > gridSize) {
+			y -= gridSize
+		}
 	}
 
 	let string = "(" + x + "," + y + ")";
@@ -96,6 +122,12 @@ function updateCells(listOfCoordinates) {
 		let cell = document.getElementById(string);
 		cell.classList.toggle("dead");
 		cell.classList.toggle("alive");
+		if (cell.classList.contains("dead")) {
+			cell.classList.add("trail");
+		}
+		if (cell.classList.contains("alive")) {
+			cell.classList.remove("trail");
+		}
 	}
 }
 

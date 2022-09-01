@@ -1,8 +1,15 @@
 @keyframes pulsate {
+    0% {background: #0e076e}
+		50% {background: #3227ce}
+    75% {background: #7b73f2}
+    100% {background: #c1bdff}
+}
+@keyframes pulsate2{
     0% {background: #000000}
-    25% {background: #0055ff}
-    50% {background: #ccd9ff}
-    100% {background: white}
+    25% {background: #090548}
+		50% {background: #8800c7}
+    75% {background: #090548}
+    100% {background: #000000}
 }
 html, body {
   height: 100%;
@@ -28,7 +35,11 @@ h1{
 	 .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr
 	 .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr
 	 .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr
-	 .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr .01fr;
+	 .01fr .01fr .01fr .01fr .01fr .01fr
+ 	 .01fr .01fr .01fr .01fr .01fr
+	 .01fr .01fr .01fr .01fr .01fr 
+	 
+	;
 }
 
 .square-cell
@@ -37,11 +48,11 @@ h1{
 	justify-content: center;
 	align-items:center;
 	background-color: #000000;
-	height:11px;
-	width:11px;
+	height:7.5px;
+	width:7.5px;
 	font-size: 12px;
 	transition: .5s;
-/* 	border: 1px solid #040227; */
+	border: .5px solid #000000;
 	
 }
 .cell-text
@@ -51,10 +62,13 @@ h1{
 
 .alive
 {
-	background-color: white;
-	animation: pulsate .5s linear;
+	background-color: #ffffff;
+	animation: pulsate .2s linear;
 }
-
+/* .trail
+{
+	animation: pulsate2 10s linear infinite;
+} */
 
 .button-50 {
   appearance: button;
